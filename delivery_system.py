@@ -60,3 +60,10 @@ combos_del_dia = {
 }
 
 # ====== Funciones del sistema =============
+
+def mostrar_bienvenida():
+    # muestra el mensaje de bienvenida
+    print("=" * 60)
+    print("=" * 15 + "🍕 ¡Bienvenido a Python Eats! 🍕")
+    print("=" * 60)
+    print()
