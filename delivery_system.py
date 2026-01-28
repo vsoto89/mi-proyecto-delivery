@@ -92,3 +92,59 @@ def verificar_cliente():
         nombre = input("¿Como te llamas? ")
         print(f"    Gracias {nombre}, te registraremos después del pedido.")
         return nombre, 0, False
+    
+def mostrar_menu_principal():
+    # Muestra el menu principal por pantalla
+    print("\n" + "=" * 40)
+    print("     MENÚ PRINCIPAL")
+    print("=" * 40)
+    print("1. 📖 Ver menú completo")
+    print("2. 🛒 Realizar pedido")
+    print("3. 🎁 Ver ofertas del día")
+    print("4. ⭐ Canjear puntos")
+    print("5. 🚪 Salir")
+    print("=" * 40)
+
+def mostrar_menu_completo():
+    #muestra todos los productos
+    print("\n" + "=" * 50)
+    print("         MENÚ COMPLETO")
+    print("=" * 50)
+
+    for categoria in menu:
+        print(f"\n🍴 {categoria}")
+        print("-" * 30)
+
+        contador = 1
+        productos = menu[categoria]
+        for nombre in productos:
+            info = productos[nombre]
+            precio = info["precio"]
+            tiempo = info["tiempo"]
+            puntos = info["puntos"]
+            print(f" {contador}. {nombre}")
+            print(f"     💵 ${precio:.2f} | ⏱️ {tiempo} min | ⭐ {puntos} pts")
+            contador += 1
+    
+    print("\n" + "=" * 10)
+    input("\nPresiona Enter para continuar...")
+
+def mostrar_ofertas():
+    """Muestra los combos especiales del día."""
+    print("\n" + "=" * 50)
+    print("       🎁 OFERTAS DEL DÍA 🎁")
+    print("=" * 50)
+
+    contador += 1
+    for nombre_combo in combos_del_dia:
+        info_combo = combos_del_dia[nombre_combo]
+        productos = ""
+        for item in info_combo["items"]:
+            productos += f"{item}, "
+        print(f"\n{contador}. {nombre_combo}")
+        print(f"   Incluye: {productos[:-2]}")
+        print(f"   💥 {info_combo['descuento']}% de descuento")
+        contador += 1
+
+    print("\n" + "=" * 50)
+    input("\nPresiona Enter para continuar...")
