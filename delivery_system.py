@@ -67,3 +67,28 @@ def mostrar_bienvenida():
     print("=" * 15 + "🍕 ¡Bienvenido a Python Eats! 🍕")
     print("=" * 60)
     print()
+
+def verificar_cliente():
+    es_cliente = ""
+    while es_cliente not in ["s","si","n","no"]:
+        es_cliente = input("¿Eres cliente registrado? (s/n): ")
+        if es_cliente not in ["s","si","n","no"]:
+            print(" Por favor, ingresa 's' para si 'n' para no.")
+    if es_cliente in ["s","si"]:
+        nombre = input("Ingresa tu nombre: ")
+
+        if nombre in clientes_vip:
+            puntos = clientes_vip[nombre]["puntos"]
+            print(f"\n✨ ¡Hola {nombre}! Tienes {puntos} puntos acumulados.")
+            print(f"📊 Has realizado {clientes_vip[nombre]['pedidos']} pedidos con nosotros.")
+            return nombre, puntos, True
+        else:
+            print(f"\n👋 Hola {nombre}! No estás registrado como cliente VIP.")
+            print("Te registraremos automáticamente después de tu pedido.")
+            return nombre, 0, False
+        
+    else:
+        print("\n👋 ¡Bienvenido nuevo cliente!")
+        nombre = input("¿Como te llamas? ")
+        print(f"    Gracias {nombre}, te registraremos después del pedido.")
+        return nombre, 0, False
