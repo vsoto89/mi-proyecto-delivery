@@ -148,3 +148,44 @@ def mostrar_ofertas():
 
     print("\n" + "=" * 50)
     input("\nPresiona Enter para continuar...")
+
+def calcular_precio_con_puntos(total, puntos_disponibles):
+    if puntos_disponibles == 0:
+        return total , 0
+    #conversion 100 puntos = $1
+    descuento_maximo = puntos_disponibles / 100
+
+    print(f"\n💰 Tienes {puntos_disponibles} puntos disponibles")
+    print(f"   Equivalen a un descuento de hasta ${descuento_maximo:.2f}")
+
+    usar = ""
+    while usar not in ["s","si","n","no"]:
+        usar = input("¿deseas usar tus puntos? (s/n): ")
+        if usar not in ["s","si","n","no"]:
+            print("❌ Por favor, ingresa 's' o 'n'")
+    
+    if usar in ["s", "si"]:
+        puntos_a_usar = 0
+        while True:
+            entrada = input(f"¿cuantos puntos quieres usar? (max{puntos_disponibles}): ")
+
+            #verificar que sea numero
+            es_numero = True
+            for char in entrada:
+                if char not in "0123456789":
+                    es_numero = False
+                    break
+            
+            if es_numero and entrada != "":
+                puntos_a_usar = int(entrada)
+                if 0 <= puntos_a_usar <= puntos_disponibles:
+                    descuento = puntos_a_usar / 100
+                    if descuento <= total:
+                        return total - descuento, puntos_a_usar
+                    else:
+                        print(f"❌ El descuento (${descuento:.2f}) es mayor que el total")
+                else:
+                    print(f"❌ Debes ingresar un número entre 0 y {puntos_disponibles}")
+            else:
+                print("❌ Por favor, ingresa un número válido")
+    return total, 0
