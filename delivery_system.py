@@ -116,7 +116,7 @@ def mostrar_menu_completo():
         print("-" * 30)
 
         contador = 1
-        productos = menu[categoria]
+        productos = menu[categoria] # Extrae el diccionario interno de esa categoría
         for nombre in productos:
             info = productos[nombre]
             precio = info["precio"]
@@ -189,3 +189,50 @@ def calcular_precio_con_puntos(total, puntos_disponibles):
             else:
                 print("❌ Por favor, ingresa un número válido")
     return total, 0
+
+def verificar_combo(items_pedido):
+
+    for nombre_combo in combos_del_dia:
+        info_combo = combos_del_dia[nombre_combo]
+        #verificar si todos los items del combo estan en el pedido
+        if all(item in items_pedido for item in info_combo["items"]):
+            return nombre_combo ,info_combo["descuento"]
+        
+    return None, 0
+
+def realizar_pedido(nombre_cliente, puntos_disponibles):
+    carrito = []
+    continuar = True
+
+    while continuar:
+        print("\n" + "=" * 40)
+        print("       REALIZAR PEDIDO")
+        print("=" * 40)
+        print("1. Entradas")
+        print("2. Platos Principales")
+        print("3. Postres")
+        print("4. Bebidas")
+        print("5. Ver carrito")
+        print("6. Finalizar pedido")
+        print("=" * 40)
+
+        opcion = input("\nSelecciona una opcion: ")
+        if opcion == 1:
+            agregar_producto(carrito, "entradas")
+        elif opcion == 2:
+            agregar_producto(carrito, "entradas") 
+        elif opcion == 3:
+            agregar_producto(carrito, "entradas") 
+        elif opcion == 4:
+            agregar_producto(carrito, "entradas") 
+        elif opcion == 5:
+            agregar_producto(carrito, "entradas")  
+        elif opcion == 6:
+            if len(carrito) > 0:
+                continuar = False
+            else:
+                print("\n❌ El carrito está vacío. Agrega productos antes de finalizar.")
+        else:
+            print("\n❌ Opción inválida. Intenta de nuevo.")
+    
+    return procesar_pedido(carrito,nombre_cliente,puntos_disponibles)
